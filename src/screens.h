@@ -54,7 +54,7 @@ int FinishOptionsScreen(void);
 // Gameplay Screen Functions Declaration
 //----------------------------------------------------------------------------------
 void InitGameplayScreen(void);
-void UpdateGameplayScreen(void);
+void UpdateGameplayScreen(float dt);
 void DrawGameplayScreen(void);
 void UnloadGameplayScreen(void);
 int FinishGameplayScreen(void);

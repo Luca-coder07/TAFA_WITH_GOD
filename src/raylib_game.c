@@ -29,7 +29,7 @@ static void TransitionToScreen(int screen); // Request transition to next screen
 static void UpdateTransition(void);         // Update transition effect
 static void DrawTransition(void);           // Draw transition effect (full-screen rectangle)
 
-static void UpdateDrawFrame(void);          // Update and draw one frame
+static void UpdateDrawFrame(float dt);          // Update and draw one frame
 
 //----------------------------------------------------------------------------------
 // Program main entry point
@@ -63,7 +63,8 @@ int main(void)
     // Main game loop
     while (!WindowShouldClose())    // Detect window close button or ESC key
     {
-        UpdateDrawFrame();
+	float dt = GetFrameTime();
+	UpdateDrawFrame(dt);
     }
 #endif
 
@@ -197,7 +198,7 @@ static void DrawTransition(void)
 }
 
 // Update and draw game frame
-static void UpdateDrawFrame(void)
+static void UpdateDrawFrame(float dt)
 {
     // Update
     //----------------------------------------------------------------------------------
@@ -231,7 +232,7 @@ static void UpdateDrawFrame(void)
             } break;
             case GAMEPLAY:
             {
-                UpdateGameplayScreen();
+                UpdateGameplayScreen(dt);
 
                 if (FinishGameplayScreen() == 1) TransitionToScreen(ENDING);
                 //else if (FinishGameplayScreen() == 2) TransitionToScreen(TITLE);

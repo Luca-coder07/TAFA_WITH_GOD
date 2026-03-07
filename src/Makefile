@@ -5,7 +5,8 @@ CFLAGS = -Wall -Wextra #-Werror
 LDFLAGS = -lraylib -lm -lpthread -ldl -lrt -lX11
 
 SRCS = raylib_game.c screen_ending.c screen_gameplay.c \
-		screen_logo.c screen_options.c screen_title.c
+	screen_logo.c screen_options.c screen_title.c \
+	player.c 
 
 OBJS = $(SRCS:%.c=%.o)
 
