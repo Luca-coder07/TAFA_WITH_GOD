@@ -1,4 +1,4 @@
-# TAFA
+# TAFA
 
 <!-- Capture d'écran ou GIF animé -->
 <!-- ![Capture d'écran du jeu](link/to/image.png) -->
@@ -6,7 +6,8 @@
 
 --- 
 
-## À propos
+## À propos
+
 Ce jeu a été créé en pensant à la façon dont le monde spirituel intéragisse avec nous.
 Le concept est simple, vous incarnez vous-même à travers votre histoire.
 Et cette histoire, c'est à vous d'en décider...Assume votre décision.
@@ -14,25 +15,26 @@ Et cette histoire, c'est à vous d'en décider...Assume votre décision.
 ---
 
 ## Fonctionnalités
-✅ - Mouvements
-✅ - Animations (WALK, IDLE)
-❌ - Jump
-❌ - HUD
-❌ - Title screen
-❌ - Finish screen
-❌ - Game over screen
-❌ - Option/Pause screen
-❌ - AI follow
-❌ - Collision with env
-❌ - Save'n load system
-❌ - Particles effects if needed
-❌ - Camera shacking
-❌ - Upgrading system
-❌ - Level Design
-❌ - Musics and sounds effects
+- ✅ Mouvements
+- ✅ Animations (WALK, IDLE)
+- ❌ Jump
+- ❌ HUD
+- ❌ Title screen
+- ❌ Finish screen
+- ❌ Game over screen
+- ❌ Option/Pause screen
+- ❌ AI follow
+- ❌ Collision with env
+- ❌ Save'n load system
+- ❌ Particles effects if needed
+- ❌ Camera shacking
+- ❌ Upgrading system
+- ❌ Level Design
+- ❌ Musics and sounds effects
 
 ## Crédits
 Luca RANDRIANIRINA alias @Lux
 
 *Ce jeu est créé avec Raylib5 en C*
+
 *Bon game!*
