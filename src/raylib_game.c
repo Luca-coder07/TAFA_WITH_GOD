@@ -42,7 +42,7 @@ int main(void)
 	//SetTraceLogLevel(LOG_WARNING);
 	// Initialization
 	//---------------------------------------------------------
-	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "TAFA with GOD");
+	InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "TAFA");
 
     InitAudioDevice();      // Initialize audio device
 
