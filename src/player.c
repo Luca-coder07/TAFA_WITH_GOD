@@ -83,7 +83,6 @@ void	UpdatePlayer(t_player *player, float dt)
 			player->state = WALK;
 		player->dir = -1;
 	}
-	
 	else if (IsKeyDown(KEY_RIGHT))
 	{
 		player->pos_x += player->speed_x * dt;
@@ -91,7 +90,6 @@ void	UpdatePlayer(t_player *player, float dt)
 			player->state = WALK;
 		player->dir = 1;
 	}
-	
 	else
 	{
 		if (player->state !=JUMP)
@@ -100,6 +98,7 @@ void	UpdatePlayer(t_player *player, float dt)
 	
 	if (IsKeyPressed(KEY_SPACE) && !player->is_jumping)
 	{
+		player->current_frame = 0;
 		player->vy = -player->jump_force;
 		player->is_jumping = true;
 	}
