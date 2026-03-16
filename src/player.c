@@ -1,5 +1,4 @@
 #include "player.h"
-#include <stdio.h>
 
 static float gravity = 900.0f;
 static float ground_level = SCREEN_HEIGHT * 0.85f;
@@ -68,7 +67,6 @@ void	UpdatePlayer(t_player *player, float dt)
 	else
 		player->state = JUMP;
 
-	printf("frame time: %0.2f\n", player->frame_time);
 	if (player->timer >= player->frame_time)
 	{
 		if (player->state != JUMP)
@@ -107,6 +105,7 @@ void	UpdatePlayer(t_player *player, float dt)
 
 	player->vy += gravity * dt;
 	player->pos_y += player->vy * dt;
+	player->pos_x += player->vx * dt;
 }
 
 void	DrawPlayer(t_player player)
