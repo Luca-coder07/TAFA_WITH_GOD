@@ -47,22 +47,34 @@ void UpdateTitleScreen(void)
 // Title Screen Draw logic
 void DrawTitleScreen(void)
 {
-	// TODO: Draw TITLE screen here!
-	Vector2 pos = { SCREEN_WIDTH / 2 - MeasureTextEx(font, "TAFA", font.baseSize*5.0f, 4).x / 2, 50};
-	DrawTextEx(font, "TAFA", pos, font.baseSize*5.0f, 4, GRAY);
-    
-	Vector2 pos_1 = { hover_state == PLAY ? 10 + font.baseSize : 10, SCREEN_HEIGHT / 2 - MeasureTextEx(font, "Hilalao", font.baseSize, 2).y };
-	Vector2 pos_2 = { hover_state == OPTION ? 10 + font.baseSize : 10, SCREEN_HEIGHT / 2 + MeasureTextEx(font, "PARAMETRES", font.baseSize, 2).y };
-	Vector2 pos_3 = { hover_state == QUIT ? 10 + font.baseSize : 10, font.baseSize*2.0f + SCREEN_HEIGHT / 2 + MeasureTextEx(font, "Hiala", font.baseSize, 2).y };
-	Vector2 pos_cursor = { 10,  pos_1.y };
-	if (hover_state == PLAY) pos_cursor.y = pos_1.y;
-	if (hover_state == OPTION) pos_cursor.y = pos_2.y;
-	if (hover_state == QUIT) pos_cursor.y = pos_3.y;
+	ClearBackground(WHITE); // Use a clean white background
 
-	DrawTextEx(font, "> ", pos_cursor, font.baseSize*2.0f, 2, BLACK);
-	DrawTextEx(font, "Hilalao", pos_1, font.baseSize*2.0f, 2, hover_state == PLAY ? BLACK : GRAY);
-	DrawTextEx(font, "PARAMETRES", pos_2, font.baseSize*2.0f, 2, hover_state == OPTION ? BLACK : GRAY);
-	DrawTextEx(font, "Hiala", pos_3, font.baseSize*2.0f, 2, hover_state == QUIT ? BLACK : GRAY);
+    const float titleFontSize = font.baseSize * 6.0f;
+    Vector2 titleTextSize = MeasureTextEx(font, "TAFA", titleFontSize, 2);
+    Vector2 titlePos = { (SCREEN_WIDTH - titleTextSize.x) / 2, 60 };
+    DrawTextEx(font, "TAFA", titlePos, titleFontSize, 2, BLACK);
+
+    const float menuFontSize = font.baseSize * 2.5f;
+    const float menuSpacing = menuFontSize * 1.8f;
+    float menuStartY = SCREEN_HEIGHT / 2 - menuSpacing;
+
+    const char *menuItems[] = {"Play", "Options", "Quit"};
+    const int menuCount = 3;
+
+    for (int i = 0; i < menuCount; i++) {
+        Vector2 textSize = MeasureTextEx(font, menuItems[i], menuFontSize, 2);
+        Vector2 pos = { (SCREEN_WIDTH - textSize.x) / 2, menuStartY + i * menuSpacing };
+
+        Color color = (hover_state == i) ? BLACK : GRAY;
+
+        if (hover_state == i) {
+            Rectangle highlightRec = { pos.x - 20, pos.y - 5, textSize.x + 40, textSize.y + 10 };
+            DrawRectangleRec(highlightRec, BLACK);
+            DrawTextEx(font, menuItems[i], (Vector2){pos.x, pos.y}, menuFontSize, 2, WHITE);
+        } else {
+            DrawTextEx(font, menuItems[i], pos, menuFontSize, 2, color);
+        }
+    }
 }
 
 // Title Screen Unload logic
