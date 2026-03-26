@@ -1,7 +1,8 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "screens.h"
+#include "types.h"
+#include "raylib_utils.h"
 
 typedef enum {IDLE, WALK, JUMP} PlayerState;
 

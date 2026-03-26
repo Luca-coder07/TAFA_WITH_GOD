@@ -12,6 +12,7 @@
 int screen_width = 1024;
 int screen_height = 768;
 GameScreen currentScreen = LOGO;
+SubGameScreen currentSubScreen = LEVEL_1;
 Font font = { 0 };
 Music music = { 0 };
 Sound fxCoin = { 0 };

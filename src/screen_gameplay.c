@@ -1,32 +1,23 @@
 #include "screens.h"
+#include "level.h"
 
-//----------------------------------------------------------------------------------
-// Module Variables Definition (local)
-//----------------------------------------------------------------------------------
 static int framesCounter = 0;
 static int finishScreen = 0;
-static t_player	player;
+static t_player player;
+static t_level level;
 
-//----------------------------------------------------------------------------------
-// Gameplay Screen Functions Definition
-//----------------------------------------------------------------------------------
-
-// Gameplay Screen Initialization logic
 void InitGameplayScreen(void)
 {
-	// TODO: Initialize GAMEPLAY screen variables here!
 	framesCounter = 0;
 	finishScreen = 0;
-
+	LoadLevel(&level, currentSubScreen);
 	InitPlayer(&player);
 }
 
-// Gameplay Screen Update logic
 void UpdateGameplayScreen(float dt)
 {
-	// TODO: Update GAMEPLAY screen variables here!
+	UpdateLevel(&level, dt);
 	UpdatePlayer(&player, dt);
-	// Press enter or tap to change to ENDING screen
 	if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
 	{
 		finishScreen = 1;
@@ -34,24 +25,19 @@ void UpdateGameplayScreen(float dt)
 	}
 }
 
-// Gameplay Screen Draw logic
 void DrawGameplayScreen(void)
 {
-    // TODO: Draw GAMEPLAY screen here!
-    DrawRectangle(0, screen_height * 0.9, screen_width, screen_height, GRAY);
-    DrawLineEx((Vector2){0, screen_height * 0.9}, (Vector2){screen_width, screen_height * 0.9}, 4, BLACK);
-    DrawPlayer(player);
+	DrawLevel(&level);
+	DrawPlayer(player);
 }
 
-// Gameplay Screen Unload logic
 void UnloadGameplayScreen(void)
 {
-    // TODO: Unload GAMEPLAY screen variables here!
-    UnloadPlayer(&player);
+	UnloadLevel(&level);
+	UnloadPlayer(&player);
 }
 
-// Gameplay Screen should finish?
 int FinishGameplayScreen(void)
 {
-    return finishScreen;
+	return finishScreen;
 }

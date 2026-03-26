@@ -1,28 +1,9 @@
 #ifndef SCREENS_H
 #define SCREENS_H
 
-#include "raylib.h"
+#include "types.h"
 #include "player.h"
 #include "raylib_utils.h"
-
-//----------------------------------------------------------------------------------
-// Types and Structures Definition
-//----------------------------------------------------------------------------------
-typedef enum GameScreen { UNKNOWN = -1, LOGO = 0, TITLE, OPTIONS, GAMEPLAY, ENDING } GameScreen;
-typedef enum SubGameScreen { PROLOGUE = 0, LEVEL_1 } SubGameScreen;
-
-//----------------------------------------------------------------------------------
-// Global Variables Declaration (shared by several modules)
-//----------------------------------------------------------------------------------
-extern int screen_width;
-extern int screen_height;
-extern GameScreen currentScreen;
-extern SubGameScreen currentSubScreen;
-extern Font font;
-extern Music music;
-extern Sound fxCoin;
-extern bool gameShouldClose;
-extern bool fxCoinLoaded;
 
 #ifdef __cplusplus
 extern "C" {            // Prevents name mangling of functions
