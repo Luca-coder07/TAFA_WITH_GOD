@@ -27,6 +27,11 @@ void InitOptionsScreen(void)
 void UpdateOptionsScreen(void)
 {
     // TODO: Update OPTIONS screen variables here!
+    if (IsKeyPressed(KEY_ENTER) || IsKeyPressed(KEY_ESCAPE))
+    {
+	    finishScreen = 1;
+	    if (IsAudioDeviceReady() && fxCoinLoaded) PlaySound(fxCoin);
+    }
 }
 
 // Options Screen Draw logic
