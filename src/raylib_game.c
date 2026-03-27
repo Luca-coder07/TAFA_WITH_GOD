@@ -44,38 +44,39 @@ int main(void)
 {
 	SetTraceLogLevel(LOG_WARNING);
 	// Initialization
-    SetConfigFlags(FLAG_WINDOW_HIDDEN);
-    InitWindow(screen_width, screen_width, "TAFA");
+    	SetConfigFlags(FLAG_WINDOW_HIDDEN);
+    	InitWindow(screen_width, screen_height, "TAFA");
 	int monitor = GetCurrentMonitor();
-    screen_width = GetMonitorWidth(monitor);
-    screen_height = GetMonitorHeight(monitor);
-    CloseWindow();
-    InitWindow(screen_width, screen_height, "TAFA");
-    ToggleFullscreen();
-    //---------------------------------------------------------
+   	screen_width = GetMonitorWidth(monitor);
+    	screen_height = GetMonitorHeight(monitor);
+    	CloseWindow();
+    	
+	InitWindow(screen_width, screen_height, "TAFA");
+    	ToggleFullscreen();
+    	//---------------------------------------------------------
     
-    InitAudioDevice();      // Initialize audio device
+    	InitAudioDevice();      // Initialize audio device
 
-    // Load global data (assets that must be available in all screens, i.e. font)
-    font = LoadFont("resources/mecha.png");
-    //music = LoadMusicStream("resources/ambient.ogg"); // TODO: Load music
+    	// Load global data (assets that must be available in all screens, i.e. font)
+    	font = LoadFont("resources/mecha.png");
+    	//music = LoadMusicStream("resources/ambient.ogg"); // TODO: Load music
 
-    // Load sound only if audio device was initialized correctly
-    if (IsAudioDeviceReady())
-    {
-        fxCoin = LoadSound("resources/coin.wav");
-        fxCoinLoaded = true;
-    }
+    	// Load sound only if audio device was initialized correctly
+    	if (IsAudioDeviceReady())
+    	{
+        	fxCoin = LoadSound("resources/coin.wav");
+        	fxCoinLoaded = true;
+    	}
 
-    // Start music only if audio device is ready and music was loaded
-    if (IsAudioDeviceReady())
-    {
-        if (music.ctxData != 0)
-        {
-            SetMusicVolume(music, 1.0f);
-            PlayMusicStream(music);
-        }
-    }
+    	// Start music only if audio device is ready and music was loaded
+    	if (IsAudioDeviceReady())
+    	{
+        	if (music.ctxData != 0)
+        	{
+            		SetMusicVolume(music, 1.0f);
+            		PlayMusicStream(music);
+        	}
+    	}
 
 	// Setup and init first screen
 	currentScreen = LOGO;

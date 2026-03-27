@@ -1,5 +1,9 @@
 #include "player.h"
 
+#define ANIM_SPEED_IDLE 0.1f
+#define ANIM_SPEED_WALK 0.1f
+#define ANIM_SPEED_JUMP 0.2f
+
 static float gravity = 900.0f;
 static float ground_level = 0;
 
@@ -20,8 +24,12 @@ void	InitPlayer(t_player *player)
 	player->pos_y = ground_level;
 	player->speed_x = 100.0f;
 	player->vy = 0.0f;
+
 	player->jump_force = 400.0f;
 	player->is_jumping = false;
+	player->jump_timer = 0.0f;
+	player->jump_cooldown = 0.2f;
+	
 	player->dir = 0;
 
 	player->current_frame = 0;
@@ -63,7 +71,7 @@ void	InitPlayer(t_player *player)
 void	UpdatePlayer(t_player *player, float dt)
 {
 	player->timer += dt;
-	player->frame_time = (player->state == JUMP) ? 0.2f : 0.1f;
+	player->frame_time = (player->state == JUMP) ? ANIM_SPEED_JUMP  : ANIM_SPEED_WALK;
     	if (player->pos_y >= ground_level)
     	{
 		// Le joueur est au sol
@@ -103,13 +111,21 @@ void	UpdatePlayer(t_player *player, float dt)
 		if (player->state !=JUMP)
 			player->state = IDLE;
 	}
+	if (player->pos_x < 50)
+		player->pos_x = 50;
+	if (player->pos_x >= screen_width - 50)
+		player->pos_x = screen_width  - 50;
 	
-	if (IsKeyPressed(KEY_SPACE) && !player->is_jumping)
+	if (IsKeyPressed(KEY_SPACE) && !player->is_jumping && player->jump_timer <= 0.0f)
 	{
 		player->current_frame = 0;
 		player->vy = -player->jump_force;
 		player->is_jumping = true;
+		player->jump_timer = player->jump_cooldown;
 	}
+
+	if (player->jump_timer > 0.0f)
+		player->jump_timer -= dt;
 
 	player->vy += gravity * dt;
 	player->pos_y += player->vy * dt;

@@ -13,8 +13,10 @@ typedef struct s_player {
 	float		vy;
 	float		jump_force;
 	bool		is_jumping;
-	int			dir; // -1: left; 1: right; 
-	int			current_frame;
+	float		jump_timer;
+	float		jump_cooldown;
+	int		dir; // -1: left; 1: right; 
+	int		current_frame;
 	float		timer;
 	float		frame_time;
 	PlayerState	state;
