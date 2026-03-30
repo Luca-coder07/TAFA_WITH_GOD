@@ -1,7 +1,7 @@
 #include "level.h"
 
 float timer = 0.0f;
-float hide_text = false;
+bool hide_text = false;
 
 char *prologue_text[4] = {
     "Dans un monde plongé dans les ténèbres,",
@@ -15,16 +15,18 @@ void LoadLevel(t_level *level, SubGameScreen levelType)
     level->name = "Level 1";
 }
 
-void UpdateLevel(t_level *level, float dt)
+void UpdateLevel(t_level *level, float dt, t_player *player)
 {
-    if (level->type == LEVEL_1 && timer <= 10.0f)
+    if (level->type == LEVEL_1 && timer <= 5.0f)
     {
         timer += dt * 1.0f;
         hide_text = false;
+        player->can_move = false;
     }
     else
     {
         hide_text = true;
+        player->can_move = true;
     }
 }
 

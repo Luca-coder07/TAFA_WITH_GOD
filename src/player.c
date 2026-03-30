@@ -48,8 +48,6 @@ void InitPlayer(t_player *player)
 	ground_level = screen_height * 0.85f;
 
 	player->pos = (Rectangle){screen_width * 0.1, ground_level, player->idle_image[0].width / 2, player->idle_image[0].height / 2};
-	// player->pos_x = screen_width * 0.1;
-	// player->pos_y = ground_level;
 	player->speed_x = 100.0f;
 	player->vy = 0.0f;
 
@@ -91,14 +89,14 @@ void UpdatePlayer(t_player *player, float dt)
 		player->timer = 0.0f;
 	}
 
-	if (IsKeyDown(KEY_LEFT))
+	if (IsKeyDown(KEY_LEFT) && player->can_move)
 	{
 		player->pos.x -= player->speed_x * dt;
 		if (player->state != JUMP)
 			player->state = WALK;
 		player->dir = -1;
 	}
-	else if (IsKeyDown(KEY_RIGHT))
+	else if (IsKeyDown(KEY_RIGHT) && player->can_move)
 	{
 		player->pos.x += player->speed_x * dt;
 		if (player->state != JUMP)
@@ -115,7 +113,7 @@ void UpdatePlayer(t_player *player, float dt)
 	if (player->pos.x >= screen_width - 50)
 		player->pos.x = screen_width - 50;
 
-	if (IsKeyPressed(KEY_SPACE) && !player->is_jumping && player->jump_timer <= 0.0f)
+	if (IsKeyPressed(KEY_SPACE) && !player->is_jumping && player->jump_timer <= 0.0f )
 	{
 		player->current_frame = 0;
 		player->vy = -player->jump_force;

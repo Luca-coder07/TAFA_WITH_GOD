@@ -14,8 +14,7 @@ typedef enum
 typedef struct s_player
 {
 	Rectangle pos;
-	// float pos_x;
-	// float pos_y;
+	bool can_move;
 	float speed_x;
 	float vy;
 	float jump_force;
