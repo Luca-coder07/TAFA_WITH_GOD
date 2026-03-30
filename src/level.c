@@ -1,4 +1,8 @@
+#include <stdio.h>
 #include "level.h"
+
+static Rectangle blackBox = {0};
+static bool showQuiz = false;
 
 float timer = 0.0f;
 bool hide_text = false;
@@ -13,20 +17,39 @@ void LoadLevel(t_level *level, SubGameScreen levelType)
 {
     level->type = levelType;
     level->name = "Level 1";
+
+    if (level->type == LEVEL_1)
+    {
+        blackBox = (Rectangle){screen_width * 0.8, screen_height * 0.85, screen_width * 0.05, screen_width * 0.05};
+        showQuiz = false;
+    }
 }
 
 void UpdateLevel(t_level *level, float dt, t_player *player)
 {
-    if (level->type == LEVEL_1 && timer <= 5.0f)
+    if (level->type == LEVEL_1)
     {
-        timer += dt * 1.0f;
-        hide_text = false;
-        player->can_move = false;
-    }
-    else
-    {
-        hide_text = true;
-        player->can_move = true;
+        if (timer <= 5.0f)
+        {
+            timer += dt * 1.0f;
+            hide_text = false;
+            player->can_move = false;
+        }
+        else
+        {
+            hide_text = true;
+            player->can_move = true;
+        }
+
+        if (CheckCollisionRecs(player->pos, blackBox))
+        {
+            printf("%0.2f\n", player->pos.x);
+            showQuiz = true;
+        }
+        else
+        {
+            showQuiz = false;
+        }
     }
 }
 
@@ -45,9 +68,27 @@ void DrawLevel(t_level *level)
                 DrawText(prologue_text[i], screen_width / 2 - textWidth / 2, screen_height / 3 + (i * 40), 40, BLACK);
             }
         }
-        Rectangle blackBox = {screen_width * 0.8, screen_height * 0.85, screen_width * 0.05, screen_width * 0.05};
         DrawRectangleRec(blackBox, (Color){10, 10, 10, 255});
-        // TO DO: Check collision between player and the box
+        if (showQuiz)
+        {
+            int quizWidth = 550;
+            int quizHeight = 300;
+            Rectangle quizRect = {screen_width / 2 - quizWidth / 2, screen_height / 2 - quizHeight / 2, quizWidth, quizHeight};
+            DrawRectangleRec(quizRect, Fade((Color){30, 30, 30, 230}, 0.9f)); // semi-transparent dark rectangle
+
+            // Draw the quiz inside the rectangle
+            const char *quizText[] = {
+                "Quiz:",
+                "Un homme qui regarde un portrait.",
+                "Quelqu'un lui demande: \"Qui est-ce?\"",
+                "Il répond: \"Je n'ai pas de soeur ni de frère,\"",
+                "mais le père de cet homme est le fils de mon père.",
+                "Qui est sur le protrait."};
+            for (int i = 0; i < 6; i++)
+            {
+                DrawText(quizText[i], quizRect.x + 10, quizRect.y + 10 + i * 40, 20, RAYWHITE);
+            }
+        }
         break;
     }
 }
