@@ -1,13 +1,12 @@
-#include "screens.h" // NOTE: Declares global (extern) variables and screens functions
+#include "tafa.h"
 
-#include <stdio.h>
 #if defined(PLATFORM_WEB)
 #include <emscripten/emscripten.h>
 #endif
 
 //----------------------------------------------------------------------------------
 // Shared Variables Definition (global)
-// NOTE: Those variables are shared between modules through screens.h
+// NOTE: Those variables are shared between modules through tafa.h
 //----------------------------------------------------------------------------------
 int screen_width = 1024;
 int screen_height = 768;

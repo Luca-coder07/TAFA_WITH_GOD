@@ -1,0 +1,33 @@
+#ifndef STRUCT_H
+#define STRUCT_H
+
+#include "tafa.h"
+
+typedef struct s_player
+{
+	Rectangle pos;
+	bool can_move;
+	float speed_x;
+	float vy;
+	float jump_force;
+	bool is_jumping;
+	float jump_timer;
+	float jump_cooldown;
+	int dir; // -1: left; 1: right;
+	int current_frame;
+	float timer;
+	float frame_time;
+	PlayerState state;
+	Texture2D idle_image[8];
+	Texture2D walk_image[8];
+	Texture2D run_image[8];
+	Texture2D jump_image[5];
+} t_player;
+
+typedef struct s_level
+{
+    SubGameScreen type;
+    const char *name;
+} t_level;
+
+#endif

@@ -1,7 +1,10 @@
 #ifndef SCREENS_H
 #define SCREENS_H
 
+#include "raylib.h"
 #include "types.h"
+#include "struct.h"
+#include <stddef.h>
 #include "player.h"
 #include "raylib_utils.h"
 

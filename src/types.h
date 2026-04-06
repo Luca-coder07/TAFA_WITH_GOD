@@ -1,8 +1,7 @@
 #ifndef TYPES_H
 #define TYPES_H
 
-#include "raylib.h"
-
+#include "tafa.h"
 typedef enum GameScreen
 {
 	UNKNOWN = -1,
@@ -18,6 +17,14 @@ typedef enum SubGameScreen
 	LEVEL_2,
 	LEVEL_3
 } SubGameScreen;
+
+typedef enum
+{
+	IDLE,
+	WALK,
+	RUN,
+	JUMP
+} PlayerState;
 
 extern int screen_width;
 extern int screen_height;
