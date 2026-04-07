@@ -14,7 +14,7 @@ Et cette histoire, c'est à vous d'en décider...Assume votre décision.
 
 ---
 
-## Fonctionnalités
+## Features
 - ✅ Walk
 - ✅ Run
 - ✅ Jump
@@ -24,7 +24,7 @@ Et cette histoire, c'est à vous d'en décider...Assume votre décision.
 - ❌ Finish screen
 - ❌ Game over screen
 - ❌ Option/Pause screen
-- ❌ AI follow
+- ❌ Spirit AI follow
 - ⚒️ Collision with env
 - ❌ Save'n load system
 - ❌ Particles effects if needed
