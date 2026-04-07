@@ -17,7 +17,6 @@ void InitGameplayScreen(void)
 void UpdateGameplayScreen(float dt)
 {
 	UpdateLevel(&level, dt, &player);
-	UpdatePlayer(&player, dt);
 	if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
 	{
 		finishScreen = 1;
@@ -27,8 +26,7 @@ void UpdateGameplayScreen(float dt)
 
 void DrawGameplayScreen(void)
 {
-	DrawLevel(&level);
-	DrawPlayer(player);
+	DrawLevel(level, player);
 }
 
 void UnloadGameplayScreen(void)

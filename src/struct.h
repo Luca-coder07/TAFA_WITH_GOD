@@ -3,6 +3,14 @@
 
 #include "tafa.h"
 
+typedef struct s_one
+{
+	char *prologue_text[4];
+	Rectangle black_box;
+	bool show_quiz;
+	bool hide_text;
+} t_one;
+
 typedef struct s_title
 {
 	float menu_font_size;
@@ -37,6 +45,7 @@ typedef struct s_level
 {
 	SubGameScreen type;
 	const char *name;
+	t_one one;
 } t_level;
 
 #endif

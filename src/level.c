@@ -1,16 +1,6 @@
 #include "level.h"
 
-static Rectangle blackBox = {0};
-static bool showQuiz = false;
-
 float timer = 0.0f;
-bool hide_text = false;
-
-char *prologue_text[4] = {
-    "Ao anaty tontolo feno aizina,",                            //"Dans un monde plongé dans les ténèbres,",
-    "izay hanjakan'ny tahotra sy fahadisoam-panantenana,",      //"où la peur et le désespoir règnent en maîtres,",
-    "izay ny tsirairay dia gejain'ny safidiny sy ny filàny...", //"où chacun est prisonnier de ses choix et désirs...",
-    "raha tsy..."};                                             //"jusqu'à ce que..."};
 
 void LoadLevel(t_level *level, SubGameScreen levelType)
 {
@@ -19,24 +9,30 @@ void LoadLevel(t_level *level, SubGameScreen levelType)
 
     if (level->type == LEVEL_1)
     {
-        blackBox = (Rectangle){screen_width * 0.8, screen_height * 0.85, screen_width * 0.05, screen_width * 0.05};
-        showQuiz = false;
+        level->one.prologue_text[1] = "Ao anaty tontolo feno aizina,";                            //"Dans un monde plongé dans les ténèbres,",
+        level->one.prologue_text[2] = "izay hanjakan'ny tahotra sy fahadisoam-panantenana,";      //"où la peur et le désespoir règnent en maîtres,",
+        level->one.prologue_text[3] = "izay ny tsirairay dia gejain'ny safidiny sy ny filàny..."; //"où chacun est prisonnier de ses choix et désirs...",
+        level->one.prologue_text[4] = "raha tsy...";
+        level->one.black_box = (Rectangle){screen_width * 0.8, screen_height * 0.85, screen_width * 0.05, screen_width * 0.05};
+        level->one.show_quiz = false;
+        level->one.hide_text = false;
     }
 }
 
 void UpdateLevel(t_level *level, float dt, t_player *player)
 {
+    UpdatePlayer(player, dt);
     if (level->type == LEVEL_1)
     {
         if (timer <= 5.0f)
         {
             timer += dt * 1.0f;
-            hide_text = false;
+            level->one.hide_text = false;
             player->can_move = false;
         }
         else
         {
-            hide_text = true;
+            level->one.hide_text = true;
             player->can_move = true;
         }
         Rectangle hitbox = {
@@ -44,32 +40,32 @@ void UpdateLevel(t_level *level, float dt, t_player *player)
             player->pos.y - player->pos.height / 4,
             player->pos.width / 2,
             player->pos.height / 2};
-        if (CheckCollisionRecs(hitbox, blackBox))
+        if (CheckCollisionRecs(hitbox, level->one.black_box))
         {
-            showQuiz = true;
+            level->one.show_quiz = true;
         }
         else
-            showQuiz = false;
+            level->one.show_quiz = false;
     }
 }
 
-void DrawLevel(t_level *level)
+void DrawLevel(t_level level, t_player player)
 {
     DrawRectangle(0, screen_height * 0.9, screen_width, screen_height, GRAY);
     DrawLineEx((Vector2){0, screen_height * 0.9}, (Vector2){screen_width, screen_height * 0.9}, 4, BLACK);
-    switch (level->type)
+    switch (level.type)
     {
     case LEVEL_1:
-        if (!hide_text)
+        if (!level.one.hide_text)
         {
             for (int i = 0; i < 4; i++)
             {
-                int textWidth = MeasureText(prologue_text[i], 40);
-                DrawText(prologue_text[i], screen_width / 2 - textWidth / 2, screen_height / 3 + (i * 40), 40, BLACK);
+                int textWidth = MeasureText(level.one.prologue_text[i], 40);
+                DrawText(level.one.prologue_text[i], screen_width / 2 - textWidth / 2, screen_height / 3 + (i * 40), 40, BLACK);
             }
         }
-        DrawRectangleRec(blackBox, (Color){10, 10, 10, 255});
-        if (showQuiz)
+        DrawRectangleRec(level.one.black_box, (Color){10, 10, 10, 255});
+        if (level.one.show_quiz)
         {
             int quizWidth = 550;
             int quizHeight = 300;
@@ -81,8 +77,8 @@ void DrawLevel(t_level *level)
                 "Quiz:",
                 "Lehilahy iray mijery sary.",
                 "Nisy olona nanontany azy: \"Iza io?\"",
-                "Namaly izy: \"Tsy manana anabavy sy rahalahy aho,\"",
-                "fa ny dadan'io olona io dia zanaky ny dadako.",
+                "Namaly izy: \"Tsy manana anabavy sy rahalahy aho,",
+                "fa ny dadan'io olona io dia zanaky ny dadako.\"",
                 "Iza ilay amin'ny sary?"};
             for (int i = 0; i < 6; i++)
             {
@@ -124,6 +120,7 @@ void DrawLevel(t_level *level)
         DrawText("LEVEL 3", 0, 0, 10, BLACK);
         break;
     }
+    DrawPlayer(player);
 }
 
 void UnloadLevel(t_level *level)
