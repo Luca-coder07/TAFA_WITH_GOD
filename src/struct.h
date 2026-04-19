@@ -23,6 +23,11 @@ typedef struct s_title
 	int hover_state;
 } t_title;
 
+typedef struct s_ending
+{
+	Texture2D died_image;
+} t_ending;
+
 typedef struct s_player
 {
 	Rectangle pos;

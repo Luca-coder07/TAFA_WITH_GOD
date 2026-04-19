@@ -22,6 +22,7 @@ bool fxCoinLoaded = false;
 
 // Required variables to manage screen transitions (fade-in, fade-out)
 static t_title title;
+static t_ending ending;
 static float transAlpha = 0.0f;
 static bool onTransition = false;
 static bool transFadeOut = false;
@@ -119,7 +120,7 @@ int main(void)
         UnloadGameplayScreen();
         break;
     case ENDING:
-        UnloadEndingScreen();
+        UnloadEndingScreen(&ending);
         break;
     default:
         break;
@@ -162,7 +163,7 @@ static void ChangeToScreen(int screen)
         UnloadGameplayScreen();
         break;
     case ENDING:
-        UnloadEndingScreen();
+        UnloadEndingScreen(&ending);
         break;
     default:
         break;
@@ -184,7 +185,7 @@ static void ChangeToScreen(int screen)
         InitGameplayScreen();
         break;
     case ENDING:
-        InitEndingScreen();
+        InitEndingScreen(&ending);
         break;
     default:
         break;
@@ -232,7 +233,7 @@ static void UpdateTransition(void)
                 UnloadGameplayScreen();
                 break;
             case ENDING:
-                UnloadEndingScreen();
+                UnloadEndingScreen(&ending);
                 break;
             default:
                 break;
@@ -254,7 +255,7 @@ static void UpdateTransition(void)
                 InitGameplayScreen();
                 break;
             case ENDING:
-                InitEndingScreen();
+                InitEndingScreen(&ending);
                 break;
             default:
                 break;
@@ -370,7 +371,7 @@ static void UpdateDrawFrame(float dt)
         DrawGameplayScreen();
         break;
     case ENDING:
-        DrawEndingScreen();
+        DrawEndingScreen(ending);
         break;
     default:
         break;

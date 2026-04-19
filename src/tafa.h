@@ -53,10 +53,10 @@ extern "C"
 	//----------------------------------------------------------------------------------
 	// Ending Screen Functions Declaration
 	//----------------------------------------------------------------------------------
-	void InitEndingScreen(void);
+	void InitEndingScreen(t_ending *ending);
 	void UpdateEndingScreen(void);
-	void DrawEndingScreen(void);
-	void UnloadEndingScreen(void);
+	void DrawEndingScreen(t_ending ending);
+	void UnloadEndingScreen(t_ending *ending);
 	int FinishEndingScreen(void);
 
 #ifdef __cplusplus

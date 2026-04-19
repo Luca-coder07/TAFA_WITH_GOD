@@ -12,7 +12,7 @@ void LoadLevel(t_level *level, SubGameScreen levelType)
         level->one.prologue_text[2] = "izay ny tsirairay dia gejain'ny safidiny sy ny filàny..."; //"où chacun est prisonnier de ses choix et désirs...",
         level->one.prologue_text[3] = "raha tsy...";
 
-        level->one.quiz_text[0] = "Quiz 1:";
+        level->one.quiz_text[0] = "Quiz :";
         level->one.quiz_text[1] = "Lehilahy iray mijery sary.";
         level->one.quiz_text[2] = "Nisy olona nanontany azy: \"Iza io?\"";
         level->one.quiz_text[3] = "Namaly izy: \"Tsy manana anabavy sy rahalahy aho,";

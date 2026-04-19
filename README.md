@@ -22,7 +22,7 @@ Et cette histoire, c'est à vous d'en décider...Assume votre décision.
 - ❌ HUD
 - ✅ Title screen
 - ❌ Finish screen
-- ❌ Game over screen
+- ⚒️ Game over screen
 - ❌ Option/Pause screen
 - ❌ Spirit AI follow
 - ⚒️ Collision with env
